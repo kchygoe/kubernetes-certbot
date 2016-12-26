@@ -78,6 +78,12 @@ kubectl exec -it ${LETSENCRYPT_POD} -- bash ./run.sh "secret-name" "mail@mydomai
 This will create a secret `foobar-secret-name` in the namespace `default` containing four entries for the individual
 `.pem` files genereted by certbot.
 
+If you need a certificate for ingress, run:
+
+```bash
+kubectl exec -it ${LETSENCRYPT_POD} -- bash ./run_ingress.sh "secret-name" "mail@mydomain.com" "mydomain.com,www.mydomain.com" "namespace"
+```
+
 [letsencrypt]: https://letsencrypt.org/
 [certbot]: https://github.com/certbot/certbot
 [kubernetes]: http://kubernetes.io/

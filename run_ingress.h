@@ -27,10 +27,8 @@ metadata:
   namespace: "${SECRET_NAMESPACE}"
 type: Opaque
 data:
-  cert.pem: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/cert.pem | base64 --wrap=0)"
-  chain.pem: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/chain.pem | base64 --wrap=0)"
-  fullchain.pem: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/fullchain.pem | base64 --wrap=0)"
-  privkey.pem: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/privkey.pem | base64 --wrap=0)"
+  tls.crt: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/fullchain.pem | base64 --wrap=0)"
+  tls.key: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/privkey.pem | base64 --wrap=0)"
 EOF
 ) > "${SECRET_NAMESPACE}-${SECRET_NAME}.yml"
 kubectl apply -f "${SECRET_NAMESPACE}-${SECRET_NAME}.yml"
