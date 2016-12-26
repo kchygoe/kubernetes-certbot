@@ -2,8 +2,8 @@
 
 EMAIL="${2}"
 DOMAINS="${3}"
+SECRET_NAMESPACE="${4:-default}"
 DOMAIN_MAIN="$(echo $DOMAINS | sed 's/,.*//')"
-SECRET_NAMESPACE="${SECRET_NAMESPACE:-default}"
 SECRET_NAME_PREFIX="${SECRET_NAME_PREFIX:-letsencrypt}"
 SECRET_NAME="${SECRET_NAME_PREFIX}-${1}"
 
@@ -31,6 +31,8 @@ data:
   chain.pem: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/chain.pem | base64 --wrap=0)"
   fullchain.pem: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/fullchain.pem | base64 --wrap=0)"
   privkey.pem: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/privkey.pem | base64 --wrap=0)"
+  tls.crt: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/fullchain.pem | base64 --wrap=0)"
+  tls.key: "$(cat /etc/letsencrypt/live/${DOMAIN_MAIN}/privkey.pem | base64 --wrap=0)"
 EOF
 ) > "${SECRET_NAMESPACE}-${SECRET_NAME}.yml"
 kubectl apply -f "${SECRET_NAMESPACE}-${SECRET_NAME}.yml"

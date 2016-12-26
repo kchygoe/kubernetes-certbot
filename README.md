@@ -72,7 +72,7 @@ server {
 Then, whenever you need a certificate, find out the name of the pod (let it be `${LETSENCRYPT_POD}` here) and execute:
 
 ```bash
-kubectl exec -it ${LETSENCRYPT_POD} -- bash ./run.sh "secret-name" "mail@mydomain.com" "mydomain.com,www.mydomain.com"
+kubectl exec -it ${LETSENCRYPT_POD} -- bash ./run.sh "secret-name" "mail@mydomain.com" "mydomain.com,www.mydomain.com" "namespace"
 ```
 
 This will create a secret `foobar-secret-name` in the namespace `default` containing four entries for the individual
