@@ -19,6 +19,7 @@ RUN \
 
 WORKDIR /opt/kubernetes-certbot
 COPY run.sh ./run.sh
+COPY run_ingress.sh ./run_ingress.sh
 
 EXPOSE 80
 CMD sleep 86400
